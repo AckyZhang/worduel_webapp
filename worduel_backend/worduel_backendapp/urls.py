@@ -17,8 +17,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('register/', views.register, name='register'),
-    path('login/', views.user_login, name='login'),
+    path('register/', views.register, name='api_register'),
+    path('login/', views.user_login, name='api_login'),
     path('create_room/', views.create_room, name='create_room'),
     path('join_room/', views.join_room, name='join_room'),
     path('start_game/', views.start_game, name='start_game'),

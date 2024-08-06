@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+axios.defaults.baseURL = 'http://localhost:8000';
+
 const JoinRoom = () => {
   const [roomNumber, setRoomNumber] = useState('');
   const [password, setPassword] = useState('');

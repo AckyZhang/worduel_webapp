@@ -1,7 +1,9 @@
 "use client";
 import { useState } from 'react';
 import axios from 'axios';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
+
+axios.defaults.baseURL = 'http://localhost:8000';
 
 const CreateRoom = () => {
   const [roomNumber, setRoomNumber] = useState<number | null>(null);
@@ -18,7 +20,7 @@ const CreateRoom = () => {
     setError(null);
 
     try {
-      const response = await axios.post('/api/create-room', {
+      const response = await axios.post('/api/create_room/', {
         room_number: roomNumber,
         password,
         player_name: playerName,
