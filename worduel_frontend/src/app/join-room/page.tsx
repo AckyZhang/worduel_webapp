@@ -14,7 +14,7 @@ const JoinRoom = () => {
   const handleSubmit = async (event: React.FormEvent): Promise<void>  => {
     event.preventDefault();
     try {
-      const response = await axios.post('/join_room', {
+      const response = await axios.post('/api/join_room', {
         room_number: roomNumber,
         password,
         player_name: playerName,
@@ -23,11 +23,12 @@ const JoinRoom = () => {
       if (response.data.status === 'joined') {
         setMessage(`Successfully joined room ${response.data.room_number}`);
       }
-    } catch (error) {
-      if (axios.isAxiosError(error) && error.response) {
-        setMessage(error.response.data.error);
+    } catch (error: any) {
+      if (error.response && error.response.status === 302) {
+        window.location.href = error.response.headers.location;
       } else {
         setMessage('An unexpected error occurred');
+        console.error(error);
       }
     }
   };

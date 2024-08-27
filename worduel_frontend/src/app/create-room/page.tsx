@@ -28,16 +28,18 @@ const CreateRoom = () => {
         word_list_name: wordListName,
         score,
       });
-
+      
+      alert(`response ${response}`);
       if (response.status === 201) {
         router.push(`/room/${response.data.room_number}`);
+      } else if (response.status === 302) {
+        console.log('Redirecting to:', response.headers.location);
+        window.location.href = response.headers.location;
       }
-    } catch (error) {
-      if (axios.isAxiosError(error) && error.response) {
-        setError(error.response.data.error);
-      } else {
-        setError('An unexpected error occurred');
-      }
+    } catch (error: any) {
+      console.error('Error response:', error.response);
+      setError('Failed to create room');
+      console.error('Error details:', error);
     }
   };
 

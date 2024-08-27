@@ -10,26 +10,28 @@ const GameControl = () => {
 
   const handleReady = async () => {
     try {
-      const response = await axios.post('/set_ready_status');
+      const response = await axios.post('/api/set_ready_status');
       setMessage(response.data.status || response.data.error);
-    } catch (error) {
-      if (axios.isAxiosError(error) && error.response) {
-        setMessage(error.response.data.error);
+    } catch (error: any) {
+      if (error.response && error.response.status === 302) {
+        window.location.href = error.response.headers.location;
       } else {
         setMessage('An unexpected error occurred');
+        console.error(error);
       }
     }
   };
 
   const handleStartGame = async () => {
     try {
-      const response = await axios.post('/start_game');
+      const response = await axios.post('/api/start_game');
       setMessage(response.data.status || response.data.error);
-    } catch (error) {
-      if (axios.isAxiosError(error) && error.response) {
-        setMessage(error.response.data.error);
+    } catch (error: any) {
+      if (error.response && error.response.status === 302) {
+        window.location.href = error.response.headers.location;
       } else {
         setMessage('An unexpected error occurred');
+        console.error(error);
       }
     }
   };

@@ -21,7 +21,7 @@ const GamePlay = () => {
   const handleGuessSubmit = async (event: React.FormEvent): Promise<void>  => {
     event.preventDefault();
     try {
-      const response = await axios.post('/make_guess', { guess });
+      const response = await axios.post('/api/make_guess', { guess });
       const { exact_matches, wrong_place } = response.data;
 
       setGuessHistory([...guessHistory, { guess, exact_matches, wrong_place }]);
@@ -36,11 +36,12 @@ const GamePlay = () => {
         setGameOver(true);
         setMessage(response.data.message);
       }
-    } catch (error) {
-      if (axios.isAxiosError(error) && error.response) {
-        setMessage(error.response.data.error);
+    } catch (error: any) {
+      if (error.response && error.response.status === 302) {
+        window.location.href = error.response.headers.location;
       } else {
         setMessage('An unexpected error occurred');
+        console.error(error);
       }
     }
   };
