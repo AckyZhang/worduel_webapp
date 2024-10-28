@@ -51,6 +51,7 @@ const JoinRoom = () => {
           <input
             type="password"
             value={password}
+            autoComplete="on"
             onChange={(e) => setPassword(e.target.value)}
             required
           />

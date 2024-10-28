@@ -86,7 +86,7 @@ def create_room(request):
             word_length=word_length)
         Player.objects.create(user=request.user, name=player_name, room=room)
 
-        return JsonResponse({'room_number': room_number})
+        return JsonResponse({'room_number': room_number}, status=201)
     return JsonResponse({'error': 'Invalid request method'}, status=405)
 
 

@@ -8,6 +8,7 @@ const Home = () => {
       <h1>Word Game</h1>
       <nav>
         <ul>
+          <li><Link href="/login">Login</Link></li>
           <li><Link href="/create-room">Create Room</Link></li>
           <li><Link href="/join-room">Join Room</Link></li>
         </ul>

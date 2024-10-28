@@ -29,7 +29,7 @@ const CreateRoom = () => {
         score,
       });
       
-      alert(`response ${response}`);
+      console.log('response:', response);
       if (response.status === 201) {
         router.push(`/room/${response.data.room_number}`);
       } else if (response.status === 302) {
@@ -60,6 +60,7 @@ const CreateRoom = () => {
           <input
             type="password"
             value={password}
+            autoComplete="on"
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
